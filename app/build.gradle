@@ -1,0 +1,89 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.mob.sdk'
+MobSDK {
+    appKey "2b965739850ab"
+    appSecret "533b620b8a6ed9f80fe7ebf15971035b"
+
+    SMSSDK {
+        //默认使用GUI，若不使用GUI，通过以下开关关闭
+        //gui false
+        //若使用GUI的自动填充验证码功能，需打开此设置
+        autoSMS true
+    }
+}
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+android {
+    useLibrary 'org.apache.http.legacy'
+    compileSdkVersion 29
+    buildToolsVersion "29.0.1"
+    defaultConfig {
+        applicationId "com.uxteam.planapp"
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+            // 还可以添加
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "6d1bcc0eb0f51e4fbb2f8893", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+        ]
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
+    implementation "com.daimajia.swipelayout:library:1.2.0@aar"
+    implementation 'cn.jiguang.sdk:jmessage:2.9.0'  // 此处以JMessage 2.9.0 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:2.0.0'  // 此处以JCore 2.0.0 版本为例。
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.github.qixuefeng:EasySQL:0.2.0'
+    implementation 'cn.jiguang.sdk:jmessage:2.9.0'  // 此处以JMessage 2.9.0 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:2.0.0'  // 此处以JCore 2.0.0 版本为例。
+    implementation 'cn.bmob.android:bmob-sdk:3.7.4'
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
+    implementation "io.reactivex.rxjava2:rxjava:2.2.2"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'com.squareup.okio:okio:2.1.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+    implementation 'cn.bmob.android:http-legacy:1.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.github.AdityaAnand1:Morphing-Material-Dialogs:0.0.3'
+    //you should also have the design support library, since we're using the native floating action button
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    implementation 'com.squareup.okio:okio:2.2.2'
+    implementation("com.squareup.okhttp3:okhttp:3.14.2")
+    implementation 'com.upyun:upyun-android-sdk:2.1.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.android.support:design:28.0.0'
+}
